@@ -9,6 +9,7 @@ class ItemCategoryWidget extends StatelessWidget {
   const ItemCategoryWidget({
     super.key,
     required this.size,
+    required this.id,
     required this.title,
     required this.status,
     required this.icons,
@@ -16,6 +17,7 @@ class ItemCategoryWidget extends StatelessWidget {
   });
 
   final Size size;
+  final String id;
   final String title;
   final bool status;
   final IconData icons;
@@ -23,11 +25,25 @@ class ItemCategoryWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    IconData icon;
+    if (title == "All") {
+      icon = Icons.dashboard_outlined;
+    } else if (title == "RWBL") {
+      icon = Icons.attractions_outlined;
+    } else if (title == "FMCG") {
+      icon = Icons.shopify;
+    } else if (title == "SPCS") {
+      icon = Icons.yard_outlined;
+    } else if (title == "PRSBL") {
+      icon = Icons.track_changes;
+    } else {
+      icon = Icons.warning;
+    }
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: kDefaultPaddin5),
+      padding: const EdgeInsets.symmetric(horizontal: 10),
       child: InkWell(
         onTap: () {
-          controller.changeMenu(title);
+          controller.changeMenu(id);
         },
         child: SizedBox(
           width: 45.w,
@@ -40,7 +56,7 @@ class ItemCategoryWidget extends StatelessWidget {
                     color: colorGrey700,
                     borderRadius: BorderRadius.circular(6)),
                 child: Icon(
-                  icons,
+                  icon as IconData?,
                   size: 25,
                   color: status == true ? colorPrimaryMain : colorGrey100,
                 ),

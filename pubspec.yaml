@@ -25,7 +25,7 @@ dependencies:
   image_picker: ^0.8.5+3
   flutter_svg_provider: ^1.0.3
   contained_tab_bar_view: ^0.8.0
-  dropdown_button2: ^1.8.1
+  dropdown_button2: 2.1.2
   intl: ^0.17.0
   datetime_picker_formfield: ^2.0.1
   flutter_keyboard_visibility: ^5.3.0
@@ -40,7 +40,7 @@ dependencies:
   modal_bottom_sheet: ^3.0.0-pre
   uuid: ^3.0.6
   animated_text_kit: ^4.2.2
-  json_annotation: ^4.7.0
+  json_annotation: 4.8.1
   flutter_native_splash: ^2.2.14
   google_fonts: ^4.0.3
   flutter_easyloading: 3.0.5
@@ -49,6 +49,14 @@ dependencies:
   sliding_up_panel: 2.0.0+1
   animated_widgets: 1.1.0
   validatorless: 1.2.3
+  freezed_annotation: 2.2.0
+  build_runner: 2.3.3
+  json_serializable: 6.6.1
+  freezed: 2.3.2
+  flutter_secure_storage: 8.0.0
+  firebase_messaging: 14.6.1
+  firebase_core: 2.13.0
+  shimmer: 2.0.0
   flutter: 
     sdk: flutter
 
@@ -63,5 +71,6 @@ flutter:
     - assets/animations/
     - assets/svg/
     - assets/json/
+    - .env
   uses-material-design: true
 

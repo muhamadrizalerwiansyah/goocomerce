@@ -1,14 +1,18 @@
 import 'package:appbar_animated/appbar_animated.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_launcher_icons/constants.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:get/get.dart';
+import 'package:goocommerce/app/data/model/category_product.dart';
+import 'package:goocommerce/app/data/model/product.dart';
 import 'package:goocommerce/app/modules/home/homePage/views/widgets/carouselSliderWidget.dart';
 import 'package:goocommerce/app/modules/home/homePage/views/widgets/itemCategoryWidget.dart';
 import 'package:goocommerce/app/routes/app_pages.dart';
 import 'package:goocommerce/configs/colorSchemes.dart';
 import 'package:goocommerce/configs/constant.dart';
+import 'package:intl/intl.dart';
 
 import '../controllers/home_page_controller.dart';
 
@@ -39,68 +43,101 @@ class HomePageView extends GetView<HomePageController> {
                   width: size.width,
                   height: 80.h,
                   color: lightColorScheme.background,
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: kDefaultPaddin20),
+                  child: SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Obx(
-                          () => ItemCategoryWidget(
-                            size: size,
-                            title: "All",
-                            status: controller.menuActive.value == "All"
-                                ? true
-                                : false,
-                            icons: Icons.dashboard_outlined,
-                            controller: controller,
-                          ),
+                        SizedBox(
+                          width: 20.w,
                         ),
+                        // Obx(
+                        //   () => ItemCategoryWidget(
+                        //     size: size,
+                        //     id: "All",
+                        //     title: "All",
+                        //     status: controller.menuActive.value == "All"
+                        //         ? true
+                        //         : false,
+                        //     icons: Icons.dashboard_outlined,
+                        //     controller: controller,
+                        //   ),
+                        // ),
                         Obx(
-                          () => ItemCategoryWidget(
-                            size: size,
-                            title: "FMCG",
-                            status: controller.menuActive.value == "FMCG"
-                                ? true
-                                : false,
-                            icons: Icons.shopify,
-                            controller: controller,
-                          ),
-                        ),
-                        Obx(
-                          () => ItemCategoryWidget(
-                            size: size,
-                            title: "PRSBL",
-                            status: controller.menuActive.value == "PRSBL"
-                                ? true
-                                : false,
-                            icons: Icons.track_changes,
-                            controller: controller,
-                          ),
-                        ),
-                        Obx(
-                          () => ItemCategoryWidget(
-                            size: size,
-                            title: "SPCS",
-                            status: controller.menuActive.value == "SPCS"
-                                ? true
-                                : false,
-                            icons: Icons.yard_outlined,
-                            controller: controller,
-                          ),
-                        ),
-                        Obx(
-                          () => ItemCategoryWidget(
-                            size: size,
-                            title: "RNWE",
-                            status: controller.menuActive.value == "RNWE"
-                                ? true
-                                : false,
-                            icons: Icons.attractions_outlined,
-                            controller: controller,
-                          ),
+                          () => ListView.builder(
+                              itemCount: controller.categoryList.length,
+                              scrollDirection: Axis.horizontal,
+                              padding: const EdgeInsets.only(top: 0, left: 0),
+                              shrinkWrap: true,
+                              physics: const NeverScrollableScrollPhysics(),
+                              itemBuilder: (BuildContext ctxt, int index) {
+                                CategoryProduct item =
+                                    controller.categoryList[index];
+                                return Obx(
+                                  () => ItemCategoryWidget(
+                                    size: size,
+                                    id: item.id,
+                                    title: item.code,
+                                    status:
+                                        controller.menuActive.value == item.id
+                                            ? true
+                                            : false,
+                                    icons: Icons.dashboard_outlined,
+                                    controller: controller,
+                                  ),
+                                );
+                              }),
                         )
+
+                        // Obx(
+                        //   () => ItemCategoryWidget(
+                        //     size: size,
+                        //     id: "-",
+                        //     title: "FMCG",
+                        //     status: controller.menuActive.value == "FMCG"
+                        //         ? true
+                        //         : false,
+                        //     icons: Icons.shopify,
+                        //     controller: controller,
+                        //   ),
+                        // ),
+                        // Obx(
+                        //   () => ItemCategoryWidget(
+                        //     size: size,
+                        //     id: "-",
+                        //     title: "PRSBL",
+                        //     status: controller.menuActive.value == "PRSBL"
+                        //         ? true
+                        //         : false,
+                        //     icons: Icons.track_changes,
+                        //     controller: controller,
+                        //   ),
+                        // ),
+                        // Obx(
+                        //   () => ItemCategoryWidget(
+                        //     size: size,
+                        //     id: "-",
+                        //     title: "SPCS",
+                        //     status: controller.menuActive.value == "SPCS"
+                        //         ? true
+                        //         : false,
+                        //     icons: Icons.yard_outlined,
+                        //     controller: controller,
+                        //   ),
+                        // ),
+                        // Obx(
+                        //   () => ItemCategoryWidget(
+                        //     size: size,
+                        //     id: "-",
+                        //     title: "RNWE",
+                        //     status: controller.menuActive.value == "RNWE"
+                        //         ? true
+                        //         : false,
+                        //     icons: Icons.attractions_outlined,
+                        //     controller: controller,
+                        //   ),
+                        // )
                       ],
                     ),
                   ),
@@ -144,54 +181,79 @@ class HomePageView extends GetView<HomePageController> {
                   height: 10.h,
                 ),
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 15),
-                  child: GridView.count(
-                    shrinkWrap: true,
-                    scrollDirection: Axis.vertical,
-                    childAspectRatio: (itemWidth / itemHeight),
-                    padding: const EdgeInsets.only(top: 0),
-                    physics: const NeverScrollableScrollPhysics(),
-                    crossAxisCount: 2,
-                    children: <Widget>[
-                      ItemProductWidget(
-                        size: size,
-                        image: "assets/images/goodDrink.jpeg",
-                        category: "FMCG",
-                        title: "GOOD DRINK Chocolate - AlMENDRA",
-                        review: "4,5",
-                        totalBuy: "100",
-                        price: "50",
-                      ),
-                      ItemProductWidget(
-                        size: size,
-                        image: "assets/images/pala.jpeg",
-                        category: "SPCS",
-                        title: "PALA - Indonesia",
-                        review: "4,5",
-                        totalBuy: "500",
-                        price: "10",
-                      ),
-                      ItemProductWidget(
-                        size: size,
-                        image: "assets/images/rengginang.jpeg",
-                        category: "FMCG",
-                        title: "RENGGINANG - Indonesia",
-                        review: "4,5",
-                        totalBuy: "500",
-                        price: "10",
-                      ),
-                      ItemProductWidget(
-                        size: size,
-                        image: "assets/images/ikanMujair.jpeg",
-                        category: "PRSBL",
-                        title: "Red Tilapia Fish",
-                        review: "4,5",
-                        totalBuy: "500",
-                        price: "20",
-                      ),
-                    ],
-                  ),
-                )
+                    padding: const EdgeInsets.symmetric(horizontal: 15),
+                    child: Obx(() => GridView.count(
+                          crossAxisCount: 2,
+                          shrinkWrap: true,
+                          scrollDirection: Axis.vertical,
+                          childAspectRatio: (itemWidth / itemHeight),
+                          padding: const EdgeInsets.only(top: 0),
+                          physics: const NeverScrollableScrollPhysics(),
+                          children: List.generate(controller.productLis.length,
+                              (index) {
+                            Product item = controller.productLis[index];
+                            var formatter = NumberFormat('#,###,000');
+
+                            return ItemProductWidget(
+                              size: size,
+                              id: item.id,
+                              image: item.photos!,
+                              category: item.nameCategory!,
+                              title: item.name,
+                              review: "4,5",
+                              totalBuy: "500",
+                              price: "IDR ${formatter.format(item.price)}",
+                            );
+                          }),
+                        ))
+
+                    //  GridView.count(
+                    //   shrinkWrap: true,
+                    //   scrollDirection: Axis.vertical,
+                    //   childAspectRatio: (itemWidth / itemHeight),
+                    //   padding: const EdgeInsets.only(top: 0),
+                    //   physics: const NeverScrollableScrollPhysics(),
+                    //   crossAxisCount: 2,
+                    //   children: <Widget>[
+                    //     ItemProductWidget(
+                    //       size: size,
+                    //       image: "assets/images/goodDrink.jpeg",
+                    //       category: "FMCG",
+                    //       title: "GOOD DRINK Chocolate - AlMENDRA",
+                    //       review: "4,5",
+                    //       totalBuy: "100",
+                    //       price: "50",
+                    //     ),
+                    //     ItemProductWidget(
+                    //       size: size,
+                    //       image: "assets/images/pala.jpeg",
+                    //       category: "SPCS",
+                    //       title: "PALA - Indonesia",
+                    //       review: "4,5",
+                    //       totalBuy: "500",
+                    //       price: "10",
+                    //     ),
+                    //     ItemProductWidget(
+                    //       size: size,
+                    //       image: "assets/images/rengginang.jpeg",
+                    //       category: "FMCG",
+                    //       title: "RENGGINANG - Indonesia",
+                    //       review: "4,5",
+                    //       totalBuy: "500",
+                    //       price: "10",
+                    //     ),
+                    //     ItemProductWidget(
+                    //       size: size,
+                    //       image: "assets/images/ikanMujair.jpeg",
+                    //       category: "PRSBL",
+                    //       title: "Red Tilapia Fish",
+                    //       review: "4,5",
+                    //       totalBuy: "500",
+                    //       price: "20",
+                    //     ),
+                    //   ],
+                    // ),
+                    )
               ],
             ),
           ),
@@ -208,10 +270,10 @@ class HomePageView extends GetView<HomePageController> {
       elevation: 0,
       bottomOpacity: 2,
       title: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Container(
-            width: 240.w,
+            width: 300.w,
             height: 35.h,
             decoration: BoxDecoration(
               color: Colors.transparent,
@@ -259,17 +321,6 @@ class HomePageView extends GetView<HomePageController> {
             color: lightColorScheme.inverseSurface,
             size: 23,
           ),
-          SizedBox(
-            width: 8.w,
-          ),
-          InkWell(
-            onTap: () {},
-            child: Icon(
-              Icons.shopping_cart_outlined,
-              color: lightColorScheme.inverseSurface,
-              size: 23,
-            ),
-          )
         ],
       ),
     );
@@ -280,6 +331,7 @@ class ItemProductWidget extends StatelessWidget {
   const ItemProductWidget({
     super.key,
     required this.size,
+    required this.id,
     required this.image,
     required this.category,
     required this.title,
@@ -289,6 +341,7 @@ class ItemProductWidget extends StatelessWidget {
   });
 
   final Size size;
+  final String id;
   final String image;
   final String category;
   final String title;
@@ -303,7 +356,7 @@ class ItemProductWidget extends StatelessWidget {
           horizontal: kDefaultPaddin5, vertical: kDefaultPaddin5),
       child: InkWell(
         onTap: () {
-          Get.toNamed(Routes.DETAIL_PRODUCT);
+          Get.toNamed(Routes.DETAIL_PRODUCT, arguments: id);
         },
         child: Container(
           width: size.width / 2 - 30.w,
@@ -329,7 +382,9 @@ class ItemProductWidget extends StatelessWidget {
                             topLeft: Radius.circular(5),
                             topRight: Radius.circular(5)),
                         image: DecorationImage(
-                            image: AssetImage(image), fit: BoxFit.fill)),
+                            image: NetworkImage(
+                                "${dotenv.env['URL_IMAGE']}$image"),
+                            fit: BoxFit.fill)),
                   )),
               Expanded(
                   flex: 2,
@@ -421,11 +476,11 @@ class ItemProductWidget extends StatelessWidget {
                                       flex: 1,
                                       child: SizedBox(
                                         child: Text(
-                                          "\$$price",
+                                          price,
                                           style: TextStyle(
                                               color: colorPrimaryMain,
-                                              fontSize: 15,
-                                              fontWeight: FontWeight.w600),
+                                              fontSize: 11,
+                                              fontWeight: FontWeight.w700),
                                           textAlign: TextAlign.end,
                                         ),
                                       ))

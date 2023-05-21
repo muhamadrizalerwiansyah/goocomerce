@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:get/get.dart';
+import 'package:goocommerce/app/routes/app_pages.dart';
 import 'package:goocommerce/configs/colorSchemes.dart';
 import 'package:goocommerce/configs/constant.dart';
 
@@ -51,166 +52,180 @@ class LoginView extends GetView<LoginController> {
               SizedBox(
                 height: 50.h,
               ),
-              Container(
-                width: size.width,
-                height: 50.h,
-                decoration: BoxDecoration(
-                    color: Colors.white,
-                    boxShadow: const [
-                      BoxShadow(
-                          color: Color.fromARGB(255, 236, 236, 236),
-                          spreadRadius: 1,
-                          blurRadius: 1,
-                          offset: Offset(0, 1) // Shadow position
+              Form(
+                  key: controller.loginFormKey,
+                  child: Column(
+                    children: [
+                      Container(
+                        width: size.width,
+                        height: 50.h,
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            boxShadow: const [
+                              BoxShadow(
+                                  color: Color.fromARGB(255, 236, 236, 236),
+                                  spreadRadius: 1,
+                                  blurRadius: 1,
+                                  offset: Offset(0, 1) // Shadow position
+                                  ),
+                            ],
+                            borderRadius: BorderRadius.circular(15)),
+                        child: TextFormField(
+                          validator: controller.emailValidator,
+                          controller: controller.emailController,
+                          decoration: InputDecoration(
+                            focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(15.0),
+                              borderSide:
+                                  const BorderSide(color: Colors.transparent),
+                            ),
+                            errorBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(15.0),
+                                borderSide:
+                                    BorderSide(color: lightColorScheme.error)),
+                            focusedErrorBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(15.0),
+                              borderSide:
+                                  BorderSide(color: lightColorScheme.error),
+                            ),
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(15),
+                              borderSide:
+                                  const BorderSide(color: Colors.transparent),
+                            ),
+                            labelText: 'Email',
+                            fillColor: lightColorScheme.background,
+                            labelStyle: TextStyle(
+                                color: lightColorScheme.outline,
+                                fontSize: 14,
+                                fontWeight: FontWeight.w400),
                           ),
-                    ],
-                    borderRadius: BorderRadius.circular(15)),
-                child: TextFormField(
-                  validator: controller.emailValidator,
-                  controller: controller.emailController,
-                  decoration: InputDecoration(
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15.0),
-                      borderSide: const BorderSide(color: Colors.transparent),
-                    ),
-                    errorBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(15.0),
-                        borderSide: BorderSide(color: lightColorScheme.error)),
-                    focusedErrorBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15.0),
-                      borderSide: BorderSide(color: lightColorScheme.error),
-                    ),
-                    enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15),
-                      borderSide: const BorderSide(color: Colors.transparent),
-                    ),
-                    labelText: 'Email',
-                    fillColor: lightColorScheme.background,
-                    labelStyle: TextStyle(
-                        color: lightColorScheme.outline,
-                        fontSize: 14,
-                        fontWeight: FontWeight.w400),
-                  ),
-                  onChanged: (text) {},
-                ),
-              ),
-              SizedBox(
-                height: 20.h,
-              ),
-              Container(
-                width: size.width,
-                height: 50.h,
-                decoration: BoxDecoration(
-                    color: Colors.white,
-                    boxShadow: const [
-                      BoxShadow(
-                          color: Color.fromARGB(255, 236, 236, 236),
-                          spreadRadius: 1,
-                          blurRadius: 1,
-                          offset: Offset(0, 1) // Shadow position
+                          onChanged: (text) {},
+                        ),
+                      ),
+                      SizedBox(
+                        height: 20.h,
+                      ),
+                      Container(
+                        width: size.width,
+                        height: 50.h,
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            boxShadow: const [
+                              BoxShadow(
+                                  color: Color.fromARGB(255, 236, 236, 236),
+                                  spreadRadius: 1,
+                                  blurRadius: 1,
+                                  offset: Offset(0, 1) // Shadow position
+                                  ),
+                            ],
+                            borderRadius: BorderRadius.circular(15)),
+                        child: Obx(
+                          () => TextFormField(
+                            validator: controller.passwordValidator,
+                            obscureText: controller.isObscure.value,
+                            controller: controller.passwordController,
+                            decoration: InputDecoration(
+                              focusedBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(15.0),
+                                borderSide:
+                                    const BorderSide(color: Colors.transparent),
+                              ),
+                              errorBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(15.0),
+                                  borderSide: BorderSide(
+                                      color: lightColorScheme.error)),
+                              focusedErrorBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(15.0),
+                                borderSide:
+                                    BorderSide(color: lightColorScheme.error),
+                              ),
+                              border: const OutlineInputBorder(),
+                              enabledBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(15),
+                                borderSide:
+                                    const BorderSide(color: Colors.transparent),
+                              ),
+                              labelText: 'Password',
+                              suffixIcon: IconButton(
+                                  icon: Icon(
+                                    controller.isObscure.value
+                                        ? Icons.visibility_off
+                                        : Icons.visibility,
+                                    color: controller.isObscure.value
+                                        ? colorGrey400
+                                        : colorGrey100,
+                                  ),
+                                  onPressed: () {
+                                    controller.isObscure.value =
+                                        !controller.isObscure.value;
+                                  }),
+                              labelStyle: TextStyle(
+                                  color: lightColorScheme.outline,
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.w400),
+                            ),
+                            onChanged: (text) {},
                           ),
-                    ],
-                    borderRadius: BorderRadius.circular(15)),
-                child: Obx(
-                  () => TextFormField(
-                    validator: controller.passwordValidator,
-                    obscureText: controller.isObscure.value,
-                    controller: controller.passwordController,
-                    decoration: InputDecoration(
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(15.0),
-                        borderSide: const BorderSide(color: Colors.transparent),
+                        ),
                       ),
-                      errorBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(15.0),
-                          borderSide:
-                              BorderSide(color: lightColorScheme.error)),
-                      focusedErrorBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(15.0),
-                        borderSide: BorderSide(color: lightColorScheme.error),
+                      SizedBox(
+                        height: 15.h,
                       ),
-                      border: const OutlineInputBorder(),
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(15),
-                        borderSide: const BorderSide(color: Colors.transparent),
-                      ),
-                      labelText: 'Password',
-                      suffixIcon: IconButton(
-                          icon: Icon(
-                            controller.isObscure.value
-                                ? Icons.visibility_off
-                                : Icons.visibility,
-                            color: controller.isObscure.value
-                                ? colorGrey400
-                                : colorGrey100,
+                      SizedBox(
+                        width: MediaQuery.of(context).size.width,
+                        height: 20.h,
+                        child: InkWell(
+                          onTap: () {
+                            // Get.toNamed(Routes.FORGOT_PASSWORD,
+                            //     preventDuplicates: false);
+                          },
+                          child: Text(
+                            "Forgot password?",
+                            style: TextStyle(
+                                fontSize: 12,
+                                color: lightColorScheme.outline,
+                                fontWeight: FontWeight.w300),
+                            textAlign: TextAlign.end,
                           ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 25.h,
+                      ),
+                      // Container(
+                      //   width: size.width,
+                      //   height: 55.h,
+                      //   decoration: BoxDecoration(
+                      //       color: colorPrimaryMain,
+                      //       boxShadow: const [
+                      //         BoxShadow(
+                      //             color: Color.fromARGB(255, 177, 237, 184),
+                      //             spreadRadius: 1,
+                      //             blurRadius: 4,
+                      //             offset: Offset(0, 1) // Shadow position
+                      //             ),
+                      //       ],
+                      //       borderRadius: BorderRadius.circular(15)),
+                      // )
+                      SizedBox(
+                        width: size.width,
+                        height: 50.h,
+                        child: ElevatedButton(
+                          style: ButtonStyle(
+                              shape: MaterialStateProperty.all<
+                                      RoundedRectangleBorder>(
+                                  RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10.0),
+                          ))),
+                          child: Text("Sign In"),
                           onPressed: () {
-                            controller.isObscure.value =
-                                !controller.isObscure.value;
-                          }),
-                      labelStyle: TextStyle(
-                          color: lightColorScheme.outline,
-                          fontSize: 12,
-                          fontWeight: FontWeight.w400),
-                    ),
-                    onChanged: (text) {},
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: 15.h,
-              ),
-              SizedBox(
-                width: MediaQuery.of(context).size.width,
-                height: 20.h,
-                child: InkWell(
-                  onTap: () {
-                    // Get.toNamed(Routes.FORGOT_PASSWORD,
-                    //     preventDuplicates: false);
-                  },
-                  child: Text(
-                    "Forgot password?",
-                    style: TextStyle(
-                        fontSize: 12,
-                        color: lightColorScheme.outline,
-                        fontWeight: FontWeight.w300),
-                    textAlign: TextAlign.end,
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: 25.h,
-              ),
-              // Container(
-              //   width: size.width,
-              //   height: 55.h,
-              //   decoration: BoxDecoration(
-              //       color: colorPrimaryMain,
-              //       boxShadow: const [
-              //         BoxShadow(
-              //             color: Color.fromARGB(255, 177, 237, 184),
-              //             spreadRadius: 1,
-              //             blurRadius: 4,
-              //             offset: Offset(0, 1) // Shadow position
-              //             ),
-              //       ],
-              //       borderRadius: BorderRadius.circular(15)),
-              // )
-              SizedBox(
-                width: size.width,
-                height: 50.h,
-                child: ElevatedButton(
-                  style: ButtonStyle(
-                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                          RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10.0),
-                  ))),
-                  child: Text("Sign In"),
-                  onPressed: () {
-                    // Get.toNamed(Routes.U_M_K_M_SEMBAKO);
-                  },
-                ),
-              ),
+                            controller.login();
+                          },
+                        ),
+                      ),
+                    ],
+                  )),
               SizedBox(
                 height: 150.h,
               ),
@@ -227,7 +242,7 @@ class LoginView extends GetView<LoginController> {
                           fontSize: 13),
                     ),
                     InkWell(
-                      onTap: () {},
+                      onTap: () => Get.toNamed(Routes.REGISTER),
                       child: Text(
                         "Register now!",
                         style: TextStyle(

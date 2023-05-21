@@ -12,6 +12,7 @@ class AccountView extends GetView<AccountController> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+    controller.getData();
     return Scaffold(
       appBar: AppBar(
         backgroundColor: lightColorScheme.background,
@@ -87,27 +88,28 @@ class AccountView extends GetView<AccountController> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(
-                                  "Muhamad Rizal Erwiansyah",
-                                  style: TextStyle(
-                                      fontSize: 14,
-                                      color: lightColorScheme.inverseSurface,
-                                      fontWeight: FontWeight.w700),
-                                ),
-                                Text(
-                                  "08238746823",
-                                  style: TextStyle(
-                                      fontSize: 13,
-                                      color: colorGrey100,
-                                      fontWeight: FontWeight.w400),
-                                ),
-                                Text(
-                                  "rizalerwiansyah@gmail.com",
-                                  style: TextStyle(
-                                      fontSize: 13,
-                                      color: colorGrey100,
-                                      fontWeight: FontWeight.w600),
-                                ),
+                                Obx(() => Text(
+                                      controller.name.value,
+                                      style: TextStyle(
+                                          fontSize: 14,
+                                          color:
+                                              lightColorScheme.inverseSurface,
+                                          fontWeight: FontWeight.w700),
+                                    )),
+                                // Text(
+                                //   "08238746823",
+                                //   style: TextStyle(
+                                //       fontSize: 13,
+                                //       color: colorGrey100,
+                                //       fontWeight: FontWeight.w400),
+                                // ),
+                                Obx(() => Text(
+                                      controller.email.value,
+                                      style: TextStyle(
+                                          fontSize: 13,
+                                          color: colorGrey100,
+                                          fontWeight: FontWeight.w600),
+                                    )),
                               ],
                             ),
                           )),
@@ -146,7 +148,9 @@ class AccountView extends GetView<AccountController> {
                     Expanded(
                         flex: 4,
                         child: InkWell(
-                          onTap: () {},
+                          onTap: () {
+                            controller.logout();
+                          },
                           child: SizedBox(
                             width: size.width,
                             child: Text(

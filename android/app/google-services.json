@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "971720361168",
+    "project_id": "app-goocomerce",
+    "storage_bucket": "app-goocomerce.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:971720361168:android:4616f6eb7fee7daccb8ad5",
+        "android_client_info": {
+          "package_name": "com.example.goocommerce"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "971720361168-d19975rfqkfglmrrf4q69lihd380lqjl.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.goocommerce",
+            "certificate_hash": "5854bde2aa4e178c5236ef5658f80688f9bd7f0e"
+          }
+        },
+        {
+          "client_id": "971720361168-k6sm78hj51mmqnajvi8fas4nvblllkua.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDl8srtMz_r5C46OR9QmTOUw4xE-axFLrI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "971720361168-k6sm78hj51mmqnajvi8fas4nvblllkua.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

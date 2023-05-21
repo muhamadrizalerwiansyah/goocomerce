@@ -9,6 +9,7 @@ import 'package:goocommerce/app/modules/home/homePage/views/home_page_view.dart'
 import 'package:goocommerce/app/modules/home/transaction/views/transaction_view.dart';
 
 import '../../../../configs/colorSchemes.dart';
+import '../cart/controllers/cart_controller.dart';
 import '../controllers/home_controller.dart';
 
 class HomeView extends GetView<HomeController> {
@@ -17,6 +18,7 @@ class HomeView extends GetView<HomeController> {
       color: Colors.white.withOpacity(0.5),
       fontWeight: FontWeight.w500,
       fontSize: 12);
+  final cartController = Get.find<CartController>();
 
   final TextStyle selectedLabelStyle = const TextStyle(
       color: Colors.white, fontWeight: FontWeight.w500, fontSize: 12);
@@ -71,16 +73,43 @@ class HomeView extends GetView<HomeController> {
                   backgroundColor: lightColorScheme.background,
                 ),
                 BottomNavigationBarItem(
-                  icon: Container(
-                    margin: const EdgeInsets.only(bottom: 2),
-                    child: SvgPicture.asset(
-                      "assets/svg/ic_cart.svg",
-                      width: 25.w,
-                      height: 25.h,
-                      color: landingPageController.tabIndex.value == 1
-                          ? colorPrimaryMain
-                          : colorGrey100,
-                    ),
+                  icon: Stack(
+                    children: [
+                      Container(
+                        margin: const EdgeInsets.only(bottom: 2),
+                        child: SvgPicture.asset(
+                          "assets/svg/ic_cart.svg",
+                          width: 25.w,
+                          height: 25.h,
+                          color: landingPageController.tabIndex.value == 1
+                              ? colorPrimaryMain
+                              : colorGrey100,
+                        ),
+                      ),
+                      Positioned(
+                        right: 0,
+                        top: 0,
+                        child: Container(
+                          decoration: BoxDecoration(
+                              color: colorRedFaded, shape: BoxShape.circle),
+                          child: Padding(
+                            padding: EdgeInsets.all(
+                                cartController.cartList.isNotEmpty ? 3.0 : 0),
+                            child: Obx(
+                              () => cartController.cartList.isNotEmpty
+                                  ? Text(
+                                      cartController.cartList.length.toString(),
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 10,
+                                      ),
+                                    )
+                                  : Container(),
+                            ),
+                          ),
+                        ),
+                      )
+                    ],
                   ),
                   label: 'Cart',
                   backgroundColor: lightColorScheme.background,
