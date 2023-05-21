@@ -75,4 +75,31 @@ class CartProvider with CacheManager {
       return false;
     }
   }
+
+  Future<String> checkout(List<Cart> cart) async {
+    try {
+      var dataForm = [];
+      for (var i = 0; i < cart.length; i++) {
+        if (cart[i].status == true) {
+          dataForm.add({
+            "cart_id": cart[i].id,
+          });
+        }
+      }
+      final token = await getToken();
+
+      dio.options.headers['accept'] = '*/*';
+      dio.options.headers["authorization"] = 'Bearer $token';
+      var response =
+          await dio.post("${dotenv.env['BASE_API']}/checkout", data: dataForm);
+
+      if (response.statusCode == 200) {
+        return response.data["data"]["id"];
+      } else {
+        return "-";
+      }
+    } catch (e) {
+      return "-";
+    }
+  }
 }

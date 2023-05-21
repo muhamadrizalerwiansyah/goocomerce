@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:get/get.dart';
 import 'package:goocommerce/app/modules/home/cart/views/widgets/ItemCartWidget.dart';
+import 'package:goocommerce/app/routes/app_pages.dart';
 import 'package:intl/intl.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 
@@ -407,10 +408,12 @@ class CartView extends GetView<CartController> {
                         flex: 1,
                         child: InkWell(
                           onTap: () {
+                            Get.toNamed(Routes.ORDER_PROCCESS);
                             if (controller.totalProduct.value > 0) {
-                              // controller.checkout();
+                              controller.checkout();
                             } else {
-                              EasyLoading.showInfo('Produk belum dipilih!');
+                              EasyLoading.showInfo(
+                                  'Product has not been selected');
                             }
                           },
                           child: Obx(
@@ -421,7 +424,7 @@ class CartView extends GetView<CartController> {
                                   borderRadius: BorderRadius.circular(10)),
                               child: Center(
                                   child: Text(
-                                "Beli (${controller.totalProduct.value})",
+                                "Buy (${controller.totalProduct.value})",
                                 style: TextStyle(
                                     color: lightColorScheme.background,
                                     fontSize: 14,

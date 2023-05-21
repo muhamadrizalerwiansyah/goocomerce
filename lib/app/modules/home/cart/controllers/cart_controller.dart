@@ -4,6 +4,7 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 
 import '../../../../data/model/cart.dart';
+import '../../../../routes/app_pages.dart';
 import '../providers/cart_provider.dart';
 
 class CartController extends GetxController {
@@ -240,6 +241,26 @@ class CartController extends GetxController {
       EasyLoading.showSuccess('Success');
     } catch (e) {
       EasyLoading.showError('Failed');
+    }
+  }
+
+  void checkout() async {
+    try {
+      await EasyLoading.show(
+        status: 'loading...',
+        maskType: EasyLoadingMaskType.custom,
+      );
+      await cartProvider.checkout(cartList).then((value) async {
+        if (value != "-") {
+          // cartList.removeWhere((element) => element.status == true);
+          await EasyLoading.dismiss();
+          await Get.toNamed(Routes.ORDER_PROCCESS, arguments: value);
+        } else {
+          await EasyLoading.showError('Failed!');
+        }
+      });
+    } catch (e) {
+      await EasyLoading.showError('Error!');
     }
   }
 
