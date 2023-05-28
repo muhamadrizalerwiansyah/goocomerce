@@ -278,7 +278,6 @@ class CartController extends GetxController {
             product: value[i].product));
       }
       update();
-      print(cartList.length);
     });
   }
 

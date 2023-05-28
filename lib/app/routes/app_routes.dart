@@ -14,6 +14,7 @@ abstract class Routes {
   static const LOGIN = _Paths.LOGIN;
   static const REGISTER = _Paths.REGISTER;
   static const ORDER_PROCCESS = _Paths.ORDER_PROCCESS;
+  static const PAYMENT_METHOD = _Paths.PAYMENT_METHOD;
 }
 
 abstract class _Paths {
@@ -29,4 +30,5 @@ abstract class _Paths {
   static const LOGIN = '/login';
   static const REGISTER = '/register';
   static const ORDER_PROCCESS = '/order-proccess';
+  static const PAYMENT_METHOD = '/payment-method';
 }

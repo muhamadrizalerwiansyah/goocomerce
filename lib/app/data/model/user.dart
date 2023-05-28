@@ -1,4 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+
+import 'branch.dart';
 part 'user.freezed.dart';
 
 part 'user.g.dart';
@@ -17,6 +19,7 @@ class User with _$User {
     @JsonKey(name: 'deleted_at') required String? deletedAt,
     @JsonKey(name: 'branch_id') String? branchId,
     Gender? gender,
+    Branch? branch,
   }) = _User;
 
   factory User.fromJson(Map<String, Object?> json) => _$UserFromJson(json);

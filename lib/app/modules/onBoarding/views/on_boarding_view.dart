@@ -161,7 +161,7 @@ class _ContainerSliderWidgetState extends State<ContainerSliderWidget> {
                                 (widget.controller.pages.length - 1))
                             ? const Center(
                                 child: Text(
-                                  "Gabung Sekarang",
+                                  "Join Now",
                                   style: TextStyle(
                                       fontSize: 17,
                                       fontWeight: FontWeight.w600,

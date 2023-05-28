@@ -25,7 +25,7 @@ class DetailProductController extends GetxController {
         name.value = value.name;
         description.value = value.description!;
         stock.value = value.stock!;
-        price.value = "Rp${formatter.format(value.price)}";
+        price.value = "IDR ${formatter.format(value.price)}";
         isLoadingDetailShimmer.value = true;
       });
     } catch (e) {}

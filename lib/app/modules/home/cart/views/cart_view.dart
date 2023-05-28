@@ -408,7 +408,7 @@ class CartView extends GetView<CartController> {
                         flex: 1,
                         child: InkWell(
                           onTap: () {
-                            Get.toNamed(Routes.ORDER_PROCCESS);
+                            // Get.toNamed(Routes.ORDER_PROCCESS);
                             if (controller.totalProduct.value > 0) {
                               controller.checkout();
                             } else {

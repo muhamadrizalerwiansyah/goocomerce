@@ -4,24 +4,23 @@ import 'package:get/get.dart';
 import '../views/widgets/SliderPageWidget.dart';
 
 class OnBoardingController extends GetxController {
-  //TODO: Implement OnBoardingController
   PageController controllerPage = PageController();
 
   List<Widget> pages = [
     const SliderPage(
-        title: "Selamat Datang di UHH",
+        title: "Welcome to GooCommerce",
         description:
-            "Selamat datang di UMKM Halal Hub (UHH). Kami adalah ekosistem sinergisme untuk pengembangan produk unggulan lokal menuju pasar global.",
+            "Welcome to GooCommerce. We are a synergy ecosystem for the development of local superior products for the global market.",
         image: "assets/images/shop.png"),
     const SliderPage(
-        title: "Industri Halal Indonesia",
+        title: "Get Your Favorite Product",
         description:
-            "Dengan UHH kamu dapat mengakses jaringan luas industri halal Indonesia dan internasional & informasi terbaru tentang tren industri halal.",
-        image: "assets/images/shipping.png"),
+            "With GooCommerce you can get the products you like at your place",
+        image: "assets/images/slide2.png"),
     const SliderPage(
-        title: "Exportir Halal Dunia",
+        title: "World Halal Exporter",
         description:
-            "Bergabunglah bersama kami untuk mewujudkan Indonesia sebagai exportir produk halal terbesar dunia.",
+            "Together with us to make Indonesia the world's largest exporter of halal products.",
         image: "assets/images/delivery.png"),
   ];
 

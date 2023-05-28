@@ -68,8 +68,9 @@ class ItemCartProccessWidget extends StatelessWidget {
                           height: 110.h,
                           decoration: BoxDecoration(
                               image: DecorationImage(
-                                  image: NetworkImage(image),
-                                  fit: BoxFit.contain),
+                                  image: NetworkImage(
+                                      "${dotenv.env['URL_IMAGE']}$image"),
+                                  fit: BoxFit.cover),
                               borderRadius: BorderRadius.circular(8)),
                         ),
                       )

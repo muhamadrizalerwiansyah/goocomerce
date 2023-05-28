@@ -35,6 +35,7 @@ mixin _$User {
   @JsonKey(name: 'branch_id')
   String? get branchId => throw _privateConstructorUsedError;
   Gender? get gender => throw _privateConstructorUsedError;
+  Branch? get branch => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -57,7 +58,10 @@ abstract class $UserCopyWith<$Res> {
       @JsonKey(name: 'updated_at') String updatedAt,
       @JsonKey(name: 'deleted_at') String? deletedAt,
       @JsonKey(name: 'branch_id') String? branchId,
-      Gender? gender});
+      Gender? gender,
+      Branch? branch});
+
+  $BranchCopyWith<$Res>? get branch;
 }
 
 /// @nodoc
@@ -84,6 +88,7 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
     Object? deletedAt = freezed,
     Object? branchId = freezed,
     Object? gender = freezed,
+    Object? branch = freezed,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -130,7 +135,23 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
           ? _value.gender
           : gender // ignore: cast_nullable_to_non_nullable
               as Gender?,
+      branch: freezed == branch
+          ? _value.branch
+          : branch // ignore: cast_nullable_to_non_nullable
+              as Branch?,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $BranchCopyWith<$Res>? get branch {
+    if (_value.branch == null) {
+      return null;
+    }
+
+    return $BranchCopyWith<$Res>(_value.branch!, (value) {
+      return _then(_value.copyWith(branch: value) as $Val);
+    });
   }
 }
 
@@ -151,7 +172,11 @@ abstract class _$$_UserCopyWith<$Res> implements $UserCopyWith<$Res> {
       @JsonKey(name: 'updated_at') String updatedAt,
       @JsonKey(name: 'deleted_at') String? deletedAt,
       @JsonKey(name: 'branch_id') String? branchId,
-      Gender? gender});
+      Gender? gender,
+      Branch? branch});
+
+  @override
+  $BranchCopyWith<$Res>? get branch;
 }
 
 /// @nodoc
@@ -174,6 +199,7 @@ class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res, _$_User>
     Object? deletedAt = freezed,
     Object? branchId = freezed,
     Object? gender = freezed,
+    Object? branch = freezed,
   }) {
     return _then(_$_User(
       id: null == id
@@ -220,6 +246,10 @@ class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res, _$_User>
           ? _value.gender
           : gender // ignore: cast_nullable_to_non_nullable
               as Gender?,
+      branch: freezed == branch
+          ? _value.branch
+          : branch // ignore: cast_nullable_to_non_nullable
+              as Branch?,
     ));
   }
 }
@@ -238,7 +268,8 @@ class _$_User implements _User {
       @JsonKey(name: 'updated_at') required this.updatedAt,
       @JsonKey(name: 'deleted_at') required this.deletedAt,
       @JsonKey(name: 'branch_id') this.branchId,
-      this.gender});
+      this.gender,
+      this.branch});
 
   factory _$_User.fromJson(Map<String, dynamic> json) => _$$_UserFromJson(json);
 
@@ -268,10 +299,12 @@ class _$_User implements _User {
   final String? branchId;
   @override
   final Gender? gender;
+  @override
+  final Branch? branch;
 
   @override
   String toString() {
-    return 'User(id: $id, name: $name, email: $email, role: $role, photo: $photo, password: $password, createdAt: $createdAt, updatedAt: $updatedAt, deletedAt: $deletedAt, branchId: $branchId, gender: $gender)';
+    return 'User(id: $id, name: $name, email: $email, role: $role, photo: $photo, password: $password, createdAt: $createdAt, updatedAt: $updatedAt, deletedAt: $deletedAt, branchId: $branchId, gender: $gender, branch: $branch)';
   }
 
   @override
@@ -294,13 +327,14 @@ class _$_User implements _User {
                 other.deletedAt == deletedAt) &&
             (identical(other.branchId, branchId) ||
                 other.branchId == branchId) &&
-            (identical(other.gender, gender) || other.gender == gender));
+            (identical(other.gender, gender) || other.gender == gender) &&
+            (identical(other.branch, branch) || other.branch == branch));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, id, name, email, role, photo,
-      password, createdAt, updatedAt, deletedAt, branchId, gender);
+      password, createdAt, updatedAt, deletedAt, branchId, gender, branch);
 
   @JsonKey(ignore: true)
   @override
@@ -328,7 +362,8 @@ abstract class _User implements User {
       @JsonKey(name: 'updated_at') required final String updatedAt,
       @JsonKey(name: 'deleted_at') required final String? deletedAt,
       @JsonKey(name: 'branch_id') final String? branchId,
-      final Gender? gender}) = _$_User;
+      final Gender? gender,
+      final Branch? branch}) = _$_User;
 
   factory _User.fromJson(Map<String, dynamic> json) = _$_User.fromJson;
 
@@ -358,6 +393,8 @@ abstract class _User implements User {
   String? get branchId;
   @override
   Gender? get gender;
+  @override
+  Branch? get branch;
   @override
   @JsonKey(ignore: true)
   _$$_UserCopyWith<_$_User> get copyWith => throw _privateConstructorUsedError;

@@ -57,6 +57,7 @@ dependencies:
   firebase_messaging: 14.6.1
   firebase_core: 2.13.0
   shimmer: 2.0.0
+  url_launcher: 6.1.11
   flutter: 
     sdk: flutter
 

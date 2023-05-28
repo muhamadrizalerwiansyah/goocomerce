@@ -18,6 +18,9 @@ _$_User _$$_UserFromJson(Map<String, dynamic> json) => _$_User(
       deletedAt: json['deleted_at'] as String?,
       branchId: json['branch_id'] as String?,
       gender: $enumDecodeNullable(_$GenderEnumMap, json['gender']),
+      branch: json['branch'] == null
+          ? null
+          : Branch.fromJson(json['branch'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$_UserToJson(_$_User instance) => <String, dynamic>{
@@ -32,6 +35,7 @@ Map<String, dynamic> _$$_UserToJson(_$_User instance) => <String, dynamic>{
       'deleted_at': instance.deletedAt,
       'branch_id': instance.branchId,
       'gender': _$GenderEnumMap[instance.gender],
+      'branch': instance.branch,
     };
 
 const _$GenderEnumMap = {

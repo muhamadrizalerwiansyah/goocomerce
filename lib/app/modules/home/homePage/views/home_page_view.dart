@@ -181,8 +181,9 @@ class HomePageView extends GetView<HomePageController> {
                   height: 10.h,
                 ),
                 Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 15),
-                    child: Obx(() => GridView.count(
+                  padding: const EdgeInsets.symmetric(horizontal: 15),
+                  child: Obx(() => controller.menuActive == "All"
+                      ? GridView.count(
                           crossAxisCount: 2,
                           shrinkWrap: true,
                           scrollDirection: Axis.vertical,
@@ -205,55 +206,88 @@ class HomePageView extends GetView<HomePageController> {
                               price: "IDR ${formatter.format(item.price)}",
                             );
                           }),
-                        ))
+                        )
+                      : GridView.count(
+                          crossAxisCount: 2,
+                          shrinkWrap: true,
+                          scrollDirection: Axis.vertical,
+                          childAspectRatio: (itemWidth / itemHeight),
+                          padding: const EdgeInsets.only(top: 0),
+                          physics: const NeverScrollableScrollPhysics(),
+                          children: List.generate(
+                              controller.productLis
+                                  .where((element) =>
+                                      element.categoryProductId ==
+                                      controller.menuActive.value)
+                                  .toList()
+                                  .length, (index) {
+                            Product item = controller.productLis
+                                .where((element) =>
+                                    element.categoryProductId ==
+                                    controller.menuActive.value)
+                                .toList()[index];
+                            var formatter = NumberFormat('#,###,000');
 
-                    //  GridView.count(
-                    //   shrinkWrap: true,
-                    //   scrollDirection: Axis.vertical,
-                    //   childAspectRatio: (itemWidth / itemHeight),
-                    //   padding: const EdgeInsets.only(top: 0),
-                    //   physics: const NeverScrollableScrollPhysics(),
-                    //   crossAxisCount: 2,
-                    //   children: <Widget>[
-                    //     ItemProductWidget(
-                    //       size: size,
-                    //       image: "assets/images/goodDrink.jpeg",
-                    //       category: "FMCG",
-                    //       title: "GOOD DRINK Chocolate - AlMENDRA",
-                    //       review: "4,5",
-                    //       totalBuy: "100",
-                    //       price: "50",
-                    //     ),
-                    //     ItemProductWidget(
-                    //       size: size,
-                    //       image: "assets/images/pala.jpeg",
-                    //       category: "SPCS",
-                    //       title: "PALA - Indonesia",
-                    //       review: "4,5",
-                    //       totalBuy: "500",
-                    //       price: "10",
-                    //     ),
-                    //     ItemProductWidget(
-                    //       size: size,
-                    //       image: "assets/images/rengginang.jpeg",
-                    //       category: "FMCG",
-                    //       title: "RENGGINANG - Indonesia",
-                    //       review: "4,5",
-                    //       totalBuy: "500",
-                    //       price: "10",
-                    //     ),
-                    //     ItemProductWidget(
-                    //       size: size,
-                    //       image: "assets/images/ikanMujair.jpeg",
-                    //       category: "PRSBL",
-                    //       title: "Red Tilapia Fish",
-                    //       review: "4,5",
-                    //       totalBuy: "500",
-                    //       price: "20",
-                    //     ),
-                    //   ],
-                    // ),
-                    )
+                            return ItemProductWidget(
+                              size: size,
+                              id: item.id,
+                              image: item.photos!,
+                              category: item.nameCategory!,
+                              title: item.name,
+                              review: "4,5",
+                              totalBuy: "500",
+                              price: "IDR ${formatter.format(item.price)}",
+                            );
+                          }),
+                        )),
+
+                  //  GridView.count(
+                  //   shrinkWrap: true,
+                  //   scrollDirection: Axis.vertical,
+                  //   childAspectRatio: (itemWidth / itemHeight),
+                  //   padding: const EdgeInsets.only(top: 0),
+                  //   physics: const NeverScrollableScrollPhysics(),
+                  //   crossAxisCount: 2,
+                  //   children: <Widget>[
+                  //     ItemProductWidget(
+                  //       size: size,
+                  //       image: "assets/images/goodDrink.jpeg",
+                  //       category: "FMCG",
+                  //       title: "GOOD DRINK Chocolate - AlMENDRA",
+                  //       review: "4,5",
+                  //       totalBuy: "100",
+                  //       price: "50",
+                  //     ),
+                  //     ItemProductWidget(
+                  //       size: size,
+                  //       image: "assets/images/pala.jpeg",
+                  //       category: "SPCS",
+                  //       title: "PALA - Indonesia",
+                  //       review: "4,5",
+                  //       totalBuy: "500",
+                  //       price: "10",
+                  //     ),
+                  //     ItemProductWidget(
+                  //       size: size,
+                  //       image: "assets/images/rengginang.jpeg",
+                  //       category: "FMCG",
+                  //       title: "RENGGINANG - Indonesia",
+                  //       review: "4,5",
+                  //       totalBuy: "500",
+                  //       price: "10",
+                  //     ),
+                  //     ItemProductWidget(
+                  //       size: size,
+                  //       image: "assets/images/ikanMujair.jpeg",
+                  //       category: "PRSBL",
+                  //       title: "Red Tilapia Fish",
+                  //       review: "4,5",
+                  //       totalBuy: "500",
+                  //       price: "20",
+                  //     ),
+                  //   ],
+                  // ),
+                )
               ],
             ),
           ),

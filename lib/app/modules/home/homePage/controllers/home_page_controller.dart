@@ -24,6 +24,7 @@ class HomePageController extends GetxController {
 
   void changeMenu(String title) {
     menuActive.value = title;
+    print(title);
     update();
   }
 
@@ -47,6 +48,7 @@ class HomePageController extends GetxController {
             photos: value[i].photos,
             description: value[i].description,
             price: value[i].price,
+            categoryProductId: value[i].categoryProductId,
             nameCategory: value[i].nameCategory));
       }
     });

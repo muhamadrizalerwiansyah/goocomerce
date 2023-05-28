@@ -7,6 +7,8 @@ import '../cart/controllers/cart_controller.dart';
 import '../cart/providers/cart_provider.dart';
 import '../controllers/home_controller.dart';
 import '../homePage/providers/home_page_provider.dart';
+import '../transaction/controllers/transaction_controller.dart';
+import '../transaction/providers/transaction_provider.dart';
 
 class HomeBinding extends Bindings {
   @override
@@ -14,6 +16,9 @@ class HomeBinding extends Bindings {
     Get.lazyPut<AccountProvider>(() => AccountProvider());
     Get.lazyPut<HomePageProvider>(() => HomePageProvider());
     Get.lazyPut<CartProvider>(() => CartProvider());
+    Get.lazyPut<TransactionProvider>(
+      () => TransactionProvider(),
+    );
 
     Get.lazyPut<HomeController>(
       () => HomeController(),
@@ -26,6 +31,9 @@ class HomeBinding extends Bindings {
     );
     Get.lazyPut<CartController>(
       () => CartController(),
+    );
+    Get.lazyPut<TransactionController>(
+      () => TransactionController(),
     );
   }
 }
